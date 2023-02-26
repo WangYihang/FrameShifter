@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+
+  reverse-proxy:
+    build: .
+    ports:
+      - 80:80
+    depends_on:
+      - origin
+
+  origin:
+    image: nginx
