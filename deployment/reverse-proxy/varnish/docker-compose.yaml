@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+
+  reverse-proxy:
+    image: varnish:7.0.0
+    ports:
+      - 80:80
+    volumes:
+      - ./default.vcl:/etc/varnish/default.vcl:ro
+    depends_on:
+      - origin
+
+  origin:
+    image: nginx
