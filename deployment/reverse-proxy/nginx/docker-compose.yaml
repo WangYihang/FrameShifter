@@ -13,4 +13,5 @@ services:
       - NGINX_PORT=80
 
   origin:
-    image: httpd
+    image: python
+    entrypoint: bash -c "mkdir /app && cd /app && echo 'It works!' > index.html && python -m http.server 80"
