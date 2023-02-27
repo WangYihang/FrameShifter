@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+
+  reverse-proxy:
+    image: caddy:2.4.5
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+
+  origin:
+    image: nginx
