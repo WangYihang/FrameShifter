@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+
+  reverse-proxy:
+    image: envoyproxy/envoy:v1.20.0
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
+    ports:
+      - "80:80"
+
+  origin:
+    image: httpd
