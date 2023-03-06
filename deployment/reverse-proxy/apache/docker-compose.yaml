@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+
+  reverse-proxy:
+    image: httpd:2.4.51
+    volumes:
+      - ./httpd.conf /usr/local/apache2/conf/httpd.conf
+    ports:
+      - "80:80"
+
+  origin:
+    image: python
+    entrypoint: bash -c "mkdir /app && cd /app && echo 'It works!' > index.html && python -m http.server 80"
