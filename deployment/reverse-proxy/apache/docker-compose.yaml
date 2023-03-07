@@ -5,7 +5,7 @@ services:
   reverse-proxy:
     image: httpd:2.4.51
     volumes:
-      - ./httpd.conf /usr/local/apache2/conf/httpd.conf
+      - ./httpd.conf:/usr/local/apache2/conf/httpd.conf
     ports:
       - "80:80"
 
