@@ -1,0 +1,20 @@
+version: '3.0'
+services:
+    trafficserver:
+        build:
+            context: .
+            args: 
+                ats_version: 9.1.0
+        image: trafficserver
+        container_name: trafficserver
+        restart: unless-stopped
+        ports:
+            - "80:80"
+            - "443:443"
+        environment:
+            - STORAGE=/cache1:-10G /cache2:-10G
+            - REMAP=trafficserver:-origin 
+    
+    origin:
+        image: python
+        entrypoint: bash -c "mkdir /app && cd /app && echo 'It works!' > index.html && python -m http.server 80"
