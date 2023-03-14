@@ -1,6 +1,5 @@
-
-
 :80 {
+        #protocols h1
         # Set this path to your site's directory.
         root * /usr/share/caddy
 

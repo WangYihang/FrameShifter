@@ -14,7 +14,7 @@ services:
       - origin
 
   origin:
-    image: traefik:v2.5.3
-    command: --providers.docker
+    image: caddy:2.4.5
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./index.html:/usr/share/caddy/index.html
