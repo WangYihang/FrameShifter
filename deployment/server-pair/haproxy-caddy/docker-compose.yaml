@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+
+  reverse-proxy:
+    image: haproxy:2.5-dev10
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./www.lzytest.tech.pem:/usr/local/etc/haproxy/site.pem
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg    
+    depends_on:
+      - origin
+
+  origin:
+    image: traefik:v2.5.3
+    command: --providers.docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
