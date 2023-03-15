@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+
+  reverse-proxy:
+    image: nginx:1.21.3
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./templates:/etc/nginx/templates
+      - ./www.lzytest.tech_bundle.pem:/etc/nginx/www.lzytest.tech_bundle.pem
+      - ./www.lzytest.tech.key:/etc/nginx/www.lzytest.tech.key
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - NGINX_PORT=80
+
+  origin:
+    image: nginx:1.21.3
+    # volumes:
+    #   - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    #   - ./templates:/etc/nginx/templates
+  
