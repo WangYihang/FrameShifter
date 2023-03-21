@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+
+  reverse-proxy:
+    image: caddy:2.4.5
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./www.lzytest.tech.crt:/etc/caddy/server.crt
+      - ./www.lzytest.tech.key:/etc/caddy/server.key
+  origin:
+    image: nginx:1.21.3
+    environment:
+      - NGINX_WORKER_CONNECTIONS=1
