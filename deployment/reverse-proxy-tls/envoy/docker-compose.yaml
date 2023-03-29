@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+
+  reverse-proxy:
+    image: envoyproxy/envoy:v1.20.0
+    volumes:
+      # - ./reverse_proxy.yaml:/etc/envoy/envoy.yaml
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
+
+    ports:
+      # - "80:80"
+      - "443:443"
+
+  origin:
+    image: python
+    entrypoint: bash -c "mkdir /app && cd /app && echo 'It works!' > index.html && python -m http.server 80"

@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+
+  reverse-proxy:
+    image: nginx:1.21.3
+    volumes:
+      # - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      # - ./templates:/etc/nginx/templates
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./www.lzytest.tech_bundle.pem:/etc/nginx/server.pem
+      - ./www.lzytest.tech.key:/etc/nginx/server.key
+    ports:
+      - "80:80"
+      - "443:443"
+    # environment:
+    #   - NGINX_PORT=80
+
+  origin:
+    image: python
+    entrypoint: bash -c "mkdir /app && cd /app && echo 'It works!' > index.html && python -m http.server 80"

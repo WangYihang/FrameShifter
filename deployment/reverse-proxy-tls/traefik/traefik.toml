@@ -1,0 +1,16 @@
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+
+  [entryPoints.web-secure]
+    address = ":443"
+
+[providers]
+  [providers.docker]
+    exposedByDefault = false
+
+
+
+[[tls.certificates]]
+  certFile = "/certs/tls.crt"
+  keyFile = "/certs/tls.key"

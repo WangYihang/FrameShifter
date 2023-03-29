@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+
+  reverse-proxy:
+    image: haproxy:2.5-dev10
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./site.pem:/usr/local/haproxy/site.pem
+    depends_on:
+      - origin
+
+  origin:
+    image: python
+    entrypoint: bash -c "mkdir /app && cd /app && echo 'It works!' > index.html && python -m http.server 80"

@@ -1,0 +1,11 @@
+# The Caddyfile is an easy way to configure your Caddy web server.
+#
+# Unless the file starts with a global options block, the first
+
+:443 {
+        # Another common task is to set up a reverse proxy:
+        tls /etc/caddy/server.crt /etc/caddy/server.key 
+        # fill you ip
+        reverse_proxy origin:80
+}
+

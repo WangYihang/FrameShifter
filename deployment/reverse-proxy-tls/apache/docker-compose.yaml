@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+
+  reverse-proxy:
+    image: httpd:2.4.51-alpine
+    volumes:
+      - ./httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./httpd-ssl.conf:/usr/local/apache2/conf/extra/httpd-ssl.conf
+      - ./www.lzytest.tech.crt:/usr/local/apache2/conf/server.crt
+      - ./www.lzytest.tech.key:/usr/local/apache2/conf/server.key
+      - ./root_bundle.crt:/usr/local/apache2/conf/server-ca.crt
+    ports:
+      - "80:80"
+      - "443:443"
+    
+
+  origin:
+    image: python
+    entrypoint: bash -c "mkdir /app && cd /app && echo 'It works!' > index.html && python -m http.server 80"
