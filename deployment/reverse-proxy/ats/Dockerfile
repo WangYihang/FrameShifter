@@ -18,10 +18,6 @@ WORKDIR /root/trafficserver-${ats_version}
 
 RUN ./configure && make && make install
 
-RUN sed -i 's/\(CONFIG proxy.config.http.server_ports STRING\).*$/\1 80 443:ssl/g' /usr/local/etc/trafficserver/records.config
-RUN sed -i 's/\(CONFIG proxy.config.http.insert_request_via_str INT\).*$/\1 0/g' /usr/local/etc/trafficserver/records.config
-RUN sed -i 's/\(CONFIG proxy.config.url_remap.pristine_host_hdr INT\).*$/\1 0/g' /usr/local/etc/trafficserver/records.config
-RUN sed -i 's/\(CONFIG proxy.config.http.cache.required_headers INT\).*$/\1 0/g' /usr/local/etc/trafficserver/records.config
 
 EXPOSE 80
 EXPOSE 443
